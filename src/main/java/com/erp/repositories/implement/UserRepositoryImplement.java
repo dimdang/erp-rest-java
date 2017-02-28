@@ -26,12 +26,12 @@ public class UserRepositoryImplement implements UserRepository{
 
     @Override
     public List<Users> getAll() {
-        return (List<Users>) getSession().createQuery("from Users where status = true ");
+        return (List<Users>) getSession().createQuery("from Users where status = true ").list();
     }
 
      @Override
     public boolean saveUser(Users user) {
-        String hqlSelect = "SELECT Users from Users user where user.email = :email";
+        String hqlSelect = "SELECT user from Users user where user.email = :email";
         Users usr = (Users) getSession().createQuery(hqlSelect).setString("email", user.getEmail()).uniqueResult();
         if (usr !=null){
             return false;
